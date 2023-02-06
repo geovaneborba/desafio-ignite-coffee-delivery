@@ -1,0 +1,203 @@
+import styled, { css } from 'styled-components'
+
+export const FormDeliveryAddressContainer = styled.div`
+  width: 40rem;
+`
+
+export const FormDeliveryAddressBackground = styled.div`
+  background: ${(props) => props.theme['base-card']};
+  padding: 2.5rem;
+  border-radius: 6px;
+`
+
+export const FormHeader = styled.header`
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+
+  svg {
+    font-size: 1.375rem;
+    color: ${(props) => props.theme['yellow-dark']};
+  }
+
+  div {
+    h4 {
+      color: ${(props) => props.theme['base-subtitle']};
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+    }
+    h6 {
+      color: ${(props) => props.theme['base-text']};
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: 0.875rem;
+    }
+  }
+`
+
+export const FormInputContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 1rem;
+
+  input {
+    border-radius: 4px;
+    padding: 0.75rem;
+    background: ${(props) => props.theme['base-input']};
+    border: 1px solid ${(props) => props.theme['base-button']};
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.3;
+
+    &:focus {
+      border: 1px solid ${(props) => props.theme['yellow-dark']};
+      color: ${(props) => props.theme['base-text']};
+    }
+
+    &#street {
+      width: 100%;
+    }
+    &#number {
+      width: 12.5rem;
+    }
+
+    &#district {
+      width: 12.5rem;
+    }
+    &#city {
+      width: 17.375rem;
+    }
+    &#state {
+      width: 3.75rem;
+    }
+
+    &::placeholder {
+      color: ${(props) => props.theme['base-label']};
+    }
+  }
+`
+
+export const FormInputGroup = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  width: 21.75rem;
+
+  input {
+    width: 100%;
+  }
+  label {
+    position: absolute;
+    right: 0.75rem;
+    font-style: italic;
+    color: ${(props) => props.theme['base-label']};
+    font-size: 0.75rem;
+    font-family: 'Roboto', sans-serif;
+  }
+`
+
+export const FormPayment = styled.div`
+  margin-top: 0.75rem;
+  background: ${(props) => props.theme['base-card']};
+  padding: 2.5rem;
+  border-radius: 6px;
+`
+export const FormPaymentHeader = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
+  svg {
+    font-size: 1.375rem;
+    color: ${(props) => props.theme['purple']};
+  }
+
+  div {
+    h4 {
+      color: ${(props) => props.theme['base-subtitle']};
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+    }
+    h6 {
+      color: ${(props) => props.theme['base-text']};
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: 0.875rem;
+    }
+  }
+`
+
+interface ButtonProps {
+  selectedPaymentMethod: string
+}
+
+const BaseButtonPayment = styled.button<ButtonProps>`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 6px;
+  background: ${(props) => props.theme['base-button']};
+  color: ${(props) => props.theme['base-text']};
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background: ${(props) => props.theme['base-hover']};
+    color: ${(props) => props.theme['base-subtitle']};
+  }
+
+  svg {
+    font-size: 1rem;
+    color: ${(props) => props.theme.purple};
+  }
+`
+
+export const CreditButton = styled(BaseButtonPayment)<ButtonProps>`
+  ${(props) =>
+    props.selectedPaymentMethod === 'credit' &&
+    css`
+      background: ${(props) => props.theme['purple-light']};
+      border: 1px solid ${(props) => props.theme.purple};
+      color: ${(props) => props.theme['base-text']};
+    `}
+`
+export const DebitButton = styled(BaseButtonPayment)<ButtonProps>`
+  ${(props) =>
+    props.selectedPaymentMethod === 'debit' &&
+    css`
+      background: ${(props) => props.theme['purple-light']};
+      border: 1px solid ${(props) => props.theme.purple};
+      color: ${(props) => props.theme['base-text']};
+    `}
+`
+export const MoneyButton = styled(BaseButtonPayment)<ButtonProps>`
+  ${(props) =>
+    props.selectedPaymentMethod === 'money' &&
+    css`
+      background: ${(props) => props.theme['purple-light']};
+      border: 1px solid ${(props) => props.theme.purple};
+      color: ${(props) => props.theme['base-text']};
+    `}
+`
+
+export const FormPayments = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.75rem;
+
+  [type='checkbox'] {
+    display: block;
+  }
+`
