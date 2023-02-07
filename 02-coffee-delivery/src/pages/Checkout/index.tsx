@@ -7,7 +7,6 @@ import { FormDeliveryAddress } from './components/FormDeliveryAddress'
 import { ShoppingCart } from './components/ShoppingCart'
 
 import { CheckoutContainer, FormContainer } from './styles'
-import { useCart } from '../../context/CartContext'
 
 const checkoutSchema = z.object({
   zipCode: z.string().min(8).max(8),

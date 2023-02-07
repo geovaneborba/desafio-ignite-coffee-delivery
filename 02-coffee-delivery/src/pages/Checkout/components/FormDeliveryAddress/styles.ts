@@ -90,6 +90,7 @@ export const FormInputGroup = styled.div`
   input {
     width: 100%;
   }
+
   label {
     position: absolute;
     right: 0.75rem;
@@ -144,7 +145,7 @@ const BaseButtonPayment = styled.button<ButtonProps>`
   border-radius: 6px;
   background: ${(props) => props.theme['base-button']};
   color: ${(props) => props.theme['base-text']};
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 0.75rem;
   line-height: 1.3;
@@ -152,6 +153,8 @@ const BaseButtonPayment = styled.button<ButtonProps>`
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  width: 11.1706rem;
+  height: 3.1875rem;
 
   &:hover {
     background: ${(props) => props.theme['base-hover']};
@@ -161,6 +164,11 @@ const BaseButtonPayment = styled.button<ButtonProps>`
   svg {
     font-size: 1rem;
     color: ${(props) => props.theme.purple};
+  }
+
+  &:focus {
+    border: 1px solid ${(props) => props.theme['purple']};
+    color: ${(props) => props.theme['base-text']};
   }
 `
 

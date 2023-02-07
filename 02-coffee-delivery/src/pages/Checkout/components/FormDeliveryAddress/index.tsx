@@ -162,6 +162,8 @@ export function FormDeliveryAddress() {
         <FormPayments>
           <label>
             <CreditButton
+              {...register('paymentMethod')}
+              defaultValue="credit"
               selectedPaymentMethod={selectedPaymentButton}
               type="button"
               onClick={() => {
@@ -177,6 +179,7 @@ export function FormDeliveryAddress() {
 
           <label>
             <DebitButton
+              defaultValue="debit"
               selectedPaymentMethod={selectedPaymentButton}
               type="button"
               onClick={() => {
@@ -192,6 +195,7 @@ export function FormDeliveryAddress() {
 
           <label>
             <MoneyButton
+              defaultValue="money"
               selectedPaymentMethod={selectedPaymentButton}
               type="button"
               onClick={() => {
