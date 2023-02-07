@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'styled-components'
 import { CartProvider } from './context/CartContext'
 import { Router } from './routes/Router'
@@ -15,6 +16,7 @@ function App() {
       </CartProvider>
 
       <GlobalStyles />
+      <ToastContainer limit={5} />
     </ThemeProvider>
   )
 }
