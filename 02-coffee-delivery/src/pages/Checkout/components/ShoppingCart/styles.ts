@@ -15,6 +15,13 @@ export const CartList = styled.div`
   border-top-left-radius: 6px;
   border-top-right-radius: 44px;
 `
+export const CartEmpty = styled.div`
+  p {
+    font-family: 'Baloo 2';
+    color: ${(props) => props.theme['base-text']};
+    font-size: 1.25rem;
+  }
+`
 export const CartItem = styled.div`
   display: flex;
   width: 100%;
@@ -31,7 +38,7 @@ export const CartItem = styled.div`
   }
 
   span {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.3;
@@ -103,6 +110,7 @@ export const CartCheckoutTotalItems = styled.div`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 0.875rem;
+    color: ${(props) => props.theme['base-text']};
   }
 
   span {
@@ -118,6 +126,7 @@ export const CartCheckoutDelivery = styled.div`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 0.875rem;
+    color: ${(props) => props.theme['base-text']};
   }
 
   span {
@@ -133,6 +142,7 @@ export const CartCheckoutTotal = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
+    color: ${(props) => props.theme['base-subtitle']};
   }
 
   span {
@@ -162,4 +172,55 @@ export const CartConfirmationButton = styled.button`
   cursor: pointer;
 
   color: ${(props) => props.theme['white']};
+
+  :disabled {
+    cursor: not-allowed;
+  }
 `
+export const SelectQuantityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  background: ${(props) => props.theme['base-button']};
+  padding: 0.75rem 0.5rem;
+  gap: 0.25rem;
+  width: 4.5rem;
+  height: 2rem;
+
+  justify-content: center;
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.3;
+    width: 1.25rem;
+    height: 1.25rem;
+    text-align: center;
+  }
+`
+const BaseIncrementButton = styled.button`
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 130%;
+    color: ${(props) => props.theme['base-title']};
+  }
+
+  svg {
+    color: ${(props) => props.theme['purple']};
+    font-size: 0.875rem;
+  }
+
+  &:hover {
+    svg {
+      color: ${(props) => props.theme['purple-dark']};
+    }
+  }
+`
+export const DecrementButton = styled(BaseIncrementButton)``
+export const IncrementButton = styled(BaseIncrementButton)``

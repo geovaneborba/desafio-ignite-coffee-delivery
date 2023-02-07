@@ -1,5 +1,5 @@
-import { Trash } from 'phosphor-react'
-import { IncrementorButton } from '../../../../components/IncrementorButton'
+import { Minus, Plus, Trash } from 'phosphor-react'
+import { toast } from 'react-toastify'
 import { useCart } from '../../../../context/CartContext'
 import {
   CartContainer,
@@ -13,10 +13,19 @@ import {
   CartCheckoutDelivery,
   CartCheckoutTotal,
   CartConfirmationButton,
+  CartEmpty,
+  SelectQuantityContainer,
+  DecrementButton,
+  IncrementButton,
 } from './styles'
 
 export function ShoppingCart() {
-  const { items, removeCoffee } = useCart()
+  const {
+    items,
+    removeCoffee,
+    increaseCoffeeQuantity,
+    decreaseCoffeeQuantity,
+  } = useCart()
 
   const totalItemsPrice = items.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.price * currentValue.quantity
@@ -27,6 +36,12 @@ export function ShoppingCart() {
       <h3>Cafés selecionados</h3>
 
       <CartList>
+        {items.length === 0 && (
+          <CartEmpty>
+            <p>Ainda não há itens no seu carrinho :(</p>
+          </CartEmpty>
+        )}
+
         {items.map((item) => (
           <CartItem key={item.id}>
             <img src={item.imgUrl} alt="Expresso Tradicional" />
@@ -34,12 +49,45 @@ export function ShoppingCart() {
             <CartItemDescription>
               <h3>{item.name}</h3>
               <CartItemActions>
-                <IncrementorButton
-                  quantity={item.quantity}
-                  coffeeId={item.id}
-                />
+                <SelectQuantityContainer>
+                  <DecrementButton
+                    type="button"
+                    onClick={() => {
+                      decreaseCoffeeQuantity(item.id)
 
-                <CartRemoveItemButton onClick={() => removeCoffee(item.id)}>
+                      if (item.quantity === 0) {
+                        console.log(item.quantity)
+                        removeCoffee(item.id)
+                      }
+                    }}
+                  >
+                    <Minus weight="fill" />
+                  </DecrementButton>
+
+                  <span>{item.quantity ? item.quantity : 0}</span>
+
+                  <IncrementButton
+                    type="button"
+                    onClick={() => increaseCoffeeQuantity(item.id)}
+                  >
+                    <Plus weight="fill" />
+                  </IncrementButton>
+                </SelectQuantityContainer>
+
+                <CartRemoveItemButton
+                  type="button"
+                  onClick={() => {
+                    removeCoffee(item.id)
+
+                    toast.error(`${item.name} removido do carrinho!`, {
+                      position: 'top-right',
+                      theme: 'light',
+                      draggable: true,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                    })
+                  }}
+                >
                   <Trash />
                   Remover
                 </CartRemoveItemButton>
@@ -55,7 +103,6 @@ export function ShoppingCart() {
             </span>
           </CartItem>
         ))}
-        {items.length === 0 && <div>Ainda não há itens no seu carrinho :(</div>}
       </CartList>
 
       <CartCheckout>
@@ -70,7 +117,7 @@ export function ShoppingCart() {
         </CartCheckoutTotalItems>
         <CartCheckoutDelivery>
           <h3>Entrega</h3>
-          <span>R$ 3,50</span>
+          <span>R$ 7,50</span>
         </CartCheckoutDelivery>
         <CartCheckoutTotal>
           <h3>Total</h3>
@@ -80,10 +127,11 @@ export function ShoppingCart() {
               : new Intl.NumberFormat('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
-                }).format(totalItemsPrice === 0 ? 0 : totalItemsPrice + 3.5)}
+                }).format(totalItemsPrice === 0 ? 0 : totalItemsPrice + 7.5)}
           </span>
         </CartCheckoutTotal>
-        <CartConfirmationButton type="submit" disabled={items.length === 0}>
+        {/* disabled={items.length === 0} */}
+        <CartConfirmationButton type="submit">
           Confirmar pedido
         </CartConfirmationButton>
       </CartCheckout>
