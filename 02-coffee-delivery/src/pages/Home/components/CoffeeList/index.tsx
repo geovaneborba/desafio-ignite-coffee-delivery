@@ -69,16 +69,6 @@ export function CoffeeList() {
     )
   }
 
-  function showToast() {
-    return toast.success('Pedido realizado com sucesso!', {
-      position: 'top-right',
-      theme: 'light',
-      draggable: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-    })
-  }
-
   return (
     <CoffeeListContainer>
       <h2>Nossos cafés</h2>
