@@ -20,7 +20,7 @@
 ## :dart: Sobre
 
 <p>
-  Desafio realizado durante o programa ignite da <a href='https://www.rocketseat.com.br/' target="_blank">Rocketseat</a>  :rocket:, onde
+  Desafio realizado durante o programa ignite da <a href='https://www.rocketseat.com.br/' target="_blank">Rocketseat</a>, onde
   foi solicitado o desenvolvimento de uma aplicação para gerenciar um carrinho de compras de uma cafeteria fictícia, que contém as seguintes funcionalidades:
 
 - Listagem de produtos (cafés) disponíveis para compra
@@ -44,10 +44,11 @@ Apesar de parecer poucas funcionalidades foi trabalhado conceitos importantes do
 
 Além de concluir o desafio eu também adicionei algumas funcionalidades que eu achei que ficou legal :D como por exemplo:
 
+- Validação do dados no formulário com React Hook Forms junto com o Zod
+- Utilizei a API do ViaCEP para preencher o formulário, após o usuário informar o seu CEP
 - Exibir uma mensagem (toast) quando o usuário adiciona um café ao carrinho
 - Exibir uma mensagem (toast) quando o usuário remove um café ao carrinho
-- Criei uma API Fake com os dados necessários para exibir a lista de produtos (cafés)
-- Utilizei o react hook forms junto com o zod para fazer a validação do formulário
+- Criei uma API Fake com os dados necessários para exibir a lista de produtos (cafés) na homepage
 
 </p>
 
@@ -62,7 +63,6 @@ As seguintes tecnologias foram usadas na construção do projeto:
 - [TypeScript](https://www.typescriptlang.org/)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
-- [JSON Server](https://github.com/typicode/json-server)
 - [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
 - [React Hook Form](https://react-hook-form.com/)
 - [ZOD](https://github.com/colinhacks/zod)
@@ -88,13 +88,6 @@ $ cd rocketseat-ignite-desafios/02-coffee-delivery
 
 # Instale as dependências
 $ npm install
-
-# Lembre-se de abrir 2 terminais ou realizar o split deles
-# Será necessário rodar a api fake para exibir os produtos
-# Na home page!
-
-# Para iniciar a API FAKE
-$ npm run fakeapi
 
 # Para iniciar o projeto
 $ npm run dev
