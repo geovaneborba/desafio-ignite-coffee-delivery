@@ -34,9 +34,12 @@ export function CoffeeList() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('http://localhost:3000/products', {
-        method: 'GET',
-      }).then((response) => response.json())
+      const response = await fetch(
+        'https://my-json-server.typicode.com/geovaneborba/rocketseat-ignite-desafios/products',
+        {
+          method: 'GET',
+        }
+      ).then((response) => response.json())
 
       setProducts(
         response.map((product: Product) => {
