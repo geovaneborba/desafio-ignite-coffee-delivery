@@ -51,6 +51,7 @@ export const CoffeeCard = styled.div`
     margin-bottom: 2rem;
   }
 `
+
 export const CoffeeTypes = styled.div`
   margin-bottom: 1rem;
   span {
@@ -97,26 +98,74 @@ export const CoffeeCardActions = styled.div`
   column-gap: 0.5rem;
 `
 
-const BaseButton = styled.button`
+export const SelectQuantityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  background: ${(props) => props.theme['base-button']};
+  padding: 0.75rem 0.5rem;
+  gap: 0.25rem;
+  width: 4.5rem;
+  height: 2.375rem;
+
+  justify-content: center;
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.3;
+    width: 1.25rem;
+    height: 1.25rem;
+    text-align: center;
+  }
+`
+
+const BaseIncrementButton = styled.button`
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 130%;
+    color: ${(props) => props.theme['base-title']};
+  }
+
+  svg {
+    color: ${(props) => props.theme['purple']};
+    font-size: 0.875rem;
+  }
+
+  &:hover {
+    svg {
+      color: ${(props) => props.theme['purple-dark']};
+    }
+  }
+`
+
+export const DecrementButton = styled(BaseIncrementButton)``
+
+export const IncrementButton = styled(BaseIncrementButton)``
+
+export const AddToCartButton = styled.button`
   border: 0;
   padding: 0.5rem;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
+  height: 2.375rem;
+  width: 2.375rem;
 
   svg {
     font-size: 1.375rem;
+    color: ${(props) => props.theme['white']};
   }
-`
 
-export const AddToCartButton = styled(BaseButton)`
   background: ${(props) => props.theme['purple-dark']};
 
   &:hover {
     background: ${(props) => props.theme['purple']};
-  }
-
-  svg {
-    color: ${(props) => props.theme['white']};
   }
 `

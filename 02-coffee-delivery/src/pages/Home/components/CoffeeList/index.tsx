@@ -6,16 +6,16 @@ import {
   CoffeeCardsContainer,
   CoffeeListContainer,
   CoffeeTypes,
+  DecrementButton,
+  IncrementButton,
   PriceContainer,
+  SelectQuantityContainer,
 } from './styles'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import { useCart } from '../../../../context/CartContext'
-import {
-  DecrementButton,
-  IncrementButton,
-  IncrementorContainer,
-} from '../../../../components/IncrementorButton/styles'
+
+import { toast } from 'react-toastify'
 
 interface Product {
   id: string
@@ -69,6 +69,16 @@ export function CoffeeList() {
     )
   }
 
+  function showToast() {
+    return toast.success('Pedido realizado com sucesso!', {
+      position: 'top-right',
+      theme: 'light',
+      draggable: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+    })
+  }
+
   return (
     <CoffeeListContainer>
       <h2>Nossos cafés</h2>
@@ -96,7 +106,7 @@ export function CoffeeList() {
               </PriceContainer>
 
               <CoffeeCardActions>
-                <IncrementorContainer>
+                <SelectQuantityContainer>
                   <DecrementButton
                     onClick={() => {
                       handleDecrement(product)
@@ -114,11 +124,25 @@ export function CoffeeList() {
                   >
                     <Plus weight="fill" />
                   </IncrementButton>
-                </IncrementorContainer>
+                </SelectQuantityContainer>
 
                 <AddToCartButton
                   onClick={() => {
-                    addItem({ ...product, quantity: product.quantity })
+                    addItem({
+                      ...product,
+                      quantity: product.quantity === 0 ? 1 : product.quantity,
+                    })
+
+                    toast.success(
+                      `${product.name} foi adicionado ao carrinho!`,
+                      {
+                        position: 'top-right',
+                        theme: 'light',
+                        draggable: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                      }
+                    )
                   }}
                 >
                   <ShoppingCart weight="fill" />
