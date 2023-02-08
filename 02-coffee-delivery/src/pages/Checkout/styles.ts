@@ -2,6 +2,13 @@ import styled from 'styled-components'
 
 export const CheckoutContainer = styled.div`
   padding: 0 10rem;
+
+  @media (max-width: 320px) {
+    padding: 0 2rem;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 0 2rem;
+  }
 `
 
 export const FormContainer = styled.div`
@@ -14,7 +21,15 @@ export const FormContainer = styled.div`
   form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-
     column-gap: 2rem;
+
+    @media (max-width: 320px) {
+      display: flex;
+      flex-direction: column;
+    }
+    @media ((min-width: 321px) and (max-width: 600px)) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `

@@ -52,6 +52,7 @@ export function Header() {
           </Item>
         </ItemsContainer>
       </DescriptionContainer>
+
       <CoffeeCupImage src={coffeeDeliveryCupImg} />
     </HeaderContainer>
   )

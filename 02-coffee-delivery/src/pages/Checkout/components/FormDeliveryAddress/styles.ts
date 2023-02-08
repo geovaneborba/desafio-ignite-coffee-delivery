@@ -2,12 +2,26 @@ import styled, { css } from 'styled-components'
 
 export const FormDeliveryAddressContainer = styled.div`
   width: 40rem;
+
+  @media (max-width: 320px) {
+    width: 100%;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    width: 100%;
+  }
 `
 
 export const FormDeliveryAddressBackground = styled.div`
   background: ${(props) => props.theme['base-card']};
   padding: 2.5rem;
   border-radius: 6px;
+
+  @media (max-width: 320px) {
+    padding: 2rem 1rem;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 2rem 1rem;
+  }
 `
 
 export const FormHeader = styled.header`
@@ -77,6 +91,21 @@ export const FormInputContainer = styled.div`
     &::placeholder {
       color: ${(props) => props.theme['base-label']};
     }
+
+    @media (max-width: 320px) {
+      width: 100% !important;
+
+      &#state {
+        width: 3.75rem !important;
+      }
+    }
+    @media ((min-width: 321px) and (max-width: 600px)) {
+      width: 100% !important;
+
+      &#state {
+        width: 3.75rem !important;
+      }
+    }
   }
 `
 
@@ -106,6 +135,13 @@ export const FormPayment = styled.div`
   background: ${(props) => props.theme['base-card']};
   padding: 2.5rem;
   border-radius: 6px;
+
+  @media (max-width: 320px) {
+    padding: 2rem 1rem;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 2rem 1rem;
+  }
 `
 export const FormPaymentHeader = styled.div`
   display: flex;
@@ -170,6 +206,13 @@ const BaseButtonPayment = styled.button<ButtonProps>`
     border: 1px solid ${(props) => props.theme['purple']};
     color: ${(props) => props.theme['base-text']};
   }
+
+  @media (max-width: 320px) {
+    width: 100%;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    width: 100%;
+  }
 `
 
 export const CreditButton = styled(BaseButtonPayment)<ButtonProps>`
@@ -205,7 +248,12 @@ export const FormPayments = styled.div`
   display: flex;
   gap: 0.75rem;
 
-  [type='checkbox'] {
-    display: block;
+  @media (max-width: 320px) {
+    display: flex;
+    flex-direction: column;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    display: flex;
+    flex-direction: column;
   }
 `

@@ -17,6 +17,7 @@ import {
   SelectQuantityContainer,
   DecrementButton,
   IncrementButton,
+  CartItemPrice,
 } from './styles'
 
 export function ShoppingCart() {
@@ -94,13 +95,13 @@ export function ShoppingCart() {
               </CartItemActions>
             </CartItemDescription>
 
-            <span>
+            <CartItemPrice>
               {new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL',
                 minimumFractionDigits: 2,
               }).format(item.price)}
-            </span>
+            </CartItemPrice>
           </CartItem>
         ))}
       </CartList>

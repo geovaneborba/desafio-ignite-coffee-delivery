@@ -7,10 +7,51 @@ export const HeaderContainer = styled.header`
   grid-template-columns: 1fr 1fr;
   column-gap: 3.5rem;
   background-image: url(${headerBackground});
+
+  /* @media (max-width: 320px) {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100% !important;
+  } */
+  @media (max-width: 600px) {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100% !important;
+  }
 `
 export const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 320px) {
+    order: 2;
+    width: 100%;
+
+    h1 {
+      font-size: 1.25rem !important;
+      width: unset !important;
+    }
+    p {
+      font-size: 1rem !important;
+    }
+  }
+
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    order: 2;
+    width: 100%;
+
+    h1 {
+      font-size: 1.75rem !important;
+      width: unset !important;
+    }
+    p {
+      font-size: 1rem !important;
+    }
+  }
 
   h1 {
     font-size: 3rem;
@@ -29,10 +70,22 @@ export const ItemsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 4.125rem;
-  grid-template-columns: 1fr 1fr;
   row-gap: 1.25rem;
   column-gap: 2.5rem;
   width: 36.6875rem;
+
+  @media (max-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
 `
 export const Item = styled.div`
   font-family: 'Roboto', sans-serif;
@@ -42,6 +95,9 @@ export const Item = styled.div`
   align-items: center;
   column-gap: 0.75rem;
   color: ${(props) => props.theme['base-text']};
+
+  @media (max-width: 320px) {
+  }
 `
 
 const BaseItemIcon = styled.span`
@@ -85,4 +141,17 @@ export const ItemIcon = styled(BaseItemIcon)<ItemIconProps>`
     `}
 `
 
-export const CoffeeCupImage = styled.img``
+export const CoffeeCupImage = styled.img`
+  @media (max-width: 320px) {
+    width: 12rem;
+    align-self: center;
+    margin-bottom: 1rem;
+  }
+
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    order: 1;
+    width: 20rem;
+    align-self: center;
+    margin-bottom: 1rem;
+  }
+`

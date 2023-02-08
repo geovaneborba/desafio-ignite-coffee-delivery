@@ -6,6 +6,58 @@ export const Nav = styled.nav`
   align-items: center;
   padding: 2rem 10rem;
 
+  @media (max-width: 320px) {
+    width: 100%;
+    margin: 0;
+    padding: 2rem;
+    gap: 8px;
+
+    a {
+      img {
+        width: 4.5rem;
+      }
+    }
+
+    div {
+      span {
+        svg {
+          font-size: 0.875rem !important;
+        }
+
+        padding: 1rem;
+
+        font-size: 0.875rem;
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.3;
+      }
+    }
+  }
+
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    width: 100%;
+    margin: 0;
+    padding: 2rem;
+    gap: 8px;
+
+    a {
+      img {
+        width: 5rem;
+      }
+    }
+
+    div {
+      span {
+        svg {
+          font-size: 0.875rem !important;
+        }
+
+        font-size: 0.875rem;
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.3;
+      }
+    }
+  }
+
   div {
     display: flex;
     gap: 0.75rem;
@@ -18,9 +70,11 @@ export const Nav = styled.nav`
       padding: 0.5rem;
       gap: 0.25rem;
       border-radius: 6px;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.3;
 
       svg {
-        font-size: 1.375rem;
+        font-size: 22px;
         color: ${(props) => props.theme['purple']};
       }
     }

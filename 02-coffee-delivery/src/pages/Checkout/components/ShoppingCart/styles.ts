@@ -3,9 +3,13 @@ import styled from 'styled-components'
 export const CartContainer = styled.div`
   width: 28rem;
 
-  > h3 {
-    margin-top: -2.5rem;
-    margin-bottom: 1rem;
+  @media (max-width: 320px) {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    width: 100%;
+    margin-top: 2rem;
   }
 `
 export const CartList = styled.div`
@@ -14,8 +18,27 @@ export const CartList = styled.div`
 
   border-top-left-radius: 6px;
   border-top-right-radius: 44px;
+
+  @media (max-width: 320px) {
+    padding: 1rem;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    width: 100%;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 1rem;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    width: 100%;
+  }
 `
 export const CartEmpty = styled.div`
+  @media (max-width: 320px) {
+    padding: 1rem 0;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 1rem 0;
+  }
   p {
     font-family: 'Baloo 2';
     color: ${(props) => props.theme['base-text']};
@@ -26,7 +49,7 @@ export const CartItem = styled.div`
   display: flex;
   width: 100%;
   border-bottom: 1px solid ${(props) => props.theme['base-button']};
-  padding-bottom: 24px;
+  padding-bottom: 1.5rem;
 
   &:not(:last-child) {
     margin-bottom: 1.5rem;
@@ -37,17 +60,42 @@ export const CartItem = styled.div`
     margin-right: 1.25rem;
   }
 
-  span {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.3;
-    color: ${(props) => props.theme['base-text']};
+  @media (max-width: 320px) {
+    img {
+      width: 3rem !important;
+      margin: 0 !important;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 0.25rem;
+    row-gap: 1rem;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    img {
+      width: 3rem !important;
+      margin: 0 !important;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 1rem;
+    row-gap: 1rem;
   }
 `
 export const CartItemDescription = styled.div`
   margin-right: 3.125rem;
   width: 10.6875rem;
+
+  @media (max-width: 320px) {
+    margin: 0;
+  }
 
   h3 {
     font-family: 'Roboto', sans-serif;
@@ -57,17 +105,60 @@ export const CartItemDescription = styled.div`
     margin-bottom: 0.5rem;
   }
 `
+
+export const SelectQuantityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  background: ${(props) => props.theme['base-button']};
+  padding: 0.75rem 0.5rem;
+  gap: 0.25rem;
+  width: 4.5rem;
+  height: 2rem;
+
+  justify-content: center;
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.3;
+    width: 1.25rem;
+    height: 1.25rem;
+    text-align: center;
+  }
+`
+
+const BaseIncrementButton = styled.button`
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 130%;
+    color: ${(props) => props.theme['base-title']};
+  }
+
+  svg {
+    color: ${(props) => props.theme['purple']};
+    font-size: 0.875rem;
+  }
+
+  &:hover {
+    svg {
+      color: ${(props) => props.theme['purple-dark']};
+    }
+  }
+`
+export const DecrementButton = styled(BaseIncrementButton)``
+export const IncrementButton = styled(BaseIncrementButton)``
+
 export const CartItemActions = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-
-  /* Incrementor Button */
-  > div {
-    border-radius: 6px;
-    width: 4.5rem;
-    height: 2rem;
-  }
 `
 export const CartRemoveItemButton = styled.button`
   display: flex;
@@ -90,6 +181,21 @@ export const CartRemoveItemButton = styled.button`
     color: ${(props) => props.theme['purple']};
   }
 `
+export const CartItemPrice = styled.span`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: ${(props) => props.theme['base-text']};
+
+  @media (max-width: 320px) {
+    margin-left: 0.5rem;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    margin-left: 0.5rem;
+  }
+`
+
 export const CartCheckout = styled.div`
   background: ${(props) => props.theme['base-card']};
   display: flex;
@@ -98,6 +204,15 @@ export const CartCheckout = styled.div`
 
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 44px;
+
+  @media (max-width: 320px) {
+    padding: 0 1rem;
+    border-radius: 0;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 0 1rem;
+    border-radius: 0;
+  }
 
   div {
     display: flex;
@@ -177,50 +292,3 @@ export const CartConfirmationButton = styled.button`
     cursor: not-allowed;
   }
 `
-export const SelectQuantityContainer = styled.div`
-  display: flex;
-  align-items: center;
-  background: ${(props) => props.theme['base-button']};
-  padding: 0.75rem 0.5rem;
-  gap: 0.25rem;
-  width: 4.5rem;
-  height: 2rem;
-
-  justify-content: center;
-
-  span {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.3;
-    width: 1.25rem;
-    height: 1.25rem;
-    text-align: center;
-  }
-`
-const BaseIncrementButton = styled.button`
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-
-  span {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 130%;
-    color: ${(props) => props.theme['base-title']};
-  }
-
-  svg {
-    color: ${(props) => props.theme['purple']};
-    font-size: 0.875rem;
-  }
-
-  &:hover {
-    svg {
-      color: ${(props) => props.theme['purple-dark']};
-    }
-  }
-`
-export const DecrementButton = styled(BaseIncrementButton)``
-export const IncrementButton = styled(BaseIncrementButton)``

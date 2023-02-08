@@ -9,7 +9,10 @@ export function Navbar() {
   return (
     <Nav>
       <Link to="/" title="Coffee Delivery">
-        <img src={coffeeDeliveryLogo} />
+        <img
+          src={coffeeDeliveryLogo}
+          alt="Uma imagem de um copo e ao lado dele está escrito Coffee Delivery"
+        />
       </Link>
 
       <div>

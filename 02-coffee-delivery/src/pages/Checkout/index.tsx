@@ -45,10 +45,6 @@ export function Checkout() {
   return (
     <CheckoutContainer>
       <FormContainer>
-        <div>
-          <h3>Complete seu pedido</h3>
-        </div>
-
         <form action="/success" onSubmit={handleSubmit(checkoutFormSubmit)}>
           <FormProvider {...formDeliveryAddress}>
             <FormDeliveryAddress />

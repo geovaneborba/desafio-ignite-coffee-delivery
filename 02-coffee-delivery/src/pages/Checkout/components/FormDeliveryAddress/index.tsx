@@ -80,6 +80,7 @@ export function FormDeliveryAddress() {
 
   return (
     <FormDeliveryAddressContainer>
+      <h3>Complete seu pedido</h3>
       <FormDeliveryAddressBackground>
         <FormHeader>
           <MapPin />
@@ -94,7 +95,7 @@ export function FormDeliveryAddress() {
             value={zipCodeMask ? zipCodeMask : ''}
             {...register('zipCode')}
             type="string"
-            id="zipcode"
+            id="zipCode"
             placeholder="CEP"
             onChange={applyZipCodeMask}
             onBlur={validateZipCode}

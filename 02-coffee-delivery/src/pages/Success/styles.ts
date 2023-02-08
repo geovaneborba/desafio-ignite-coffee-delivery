@@ -14,6 +14,21 @@ export const SuccessContainer = styled.div`
     font-weight: 400;
     color: ${(props) => props.theme['base-subtitle']};
   }
+
+  @media (max-width: 320px) {
+    padding: 0 2rem;
+
+    h2 {
+      margin-top: 1rem;
+    }
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 0 2rem;
+
+    h2 {
+      margin-top: 1rem;
+    }
+  }
 `
 export const OrderWrapper = styled.div`
   margin-top: 2.5rem;
@@ -26,6 +41,27 @@ export const OrderWrapper = styled.div`
     position: absolute;
     right: 0;
     bottom: -0.9375rem;
+  }
+
+  @media (max-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+
+    img {
+      position: unset;
+      margin-top: 2rem;
+    }
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+
+    img {
+      position: unset;
+      margin-top: 2rem;
+    }
   }
 `
 export const OrderContainer = styled.div`
@@ -49,11 +85,27 @@ export const OrderContainer = styled.div`
       )
       border-box;
   border: 1px solid transparent;
+
+  @media (max-width: 320px) {
+    padding: 1rem;
+    width: 100%;
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 1rem;
+    width: 100%;
+  }
 `
 export const OrderItem = styled.div`
   display: flex;
   column-gap: 0.75rem;
   align-items: center;
+
+  @media (max-width: 320px) {
+    width: 100%;
+  }
+  @media ((min-width: 321px) and (max-width:600px)) {
+    width: 100%;
+  }
 `
 
 const BaseItemIcon = styled.span`
