@@ -6,6 +6,10 @@
   <img alt="Licença" src="https://img.shields.io/github/license/geovaneborba/rocketseat-ignite-desafios?color=4f46e5&style=for-the-badge">
 </p>
 
+<p align='center'>
+<img alt="Wakatime"  src="https://wakatime.com/badge/user/304db51b-872c-40ce-8ed3-afb6810c1e59/project/613636ac-3419-4d95-aed6-19506f87f7b5.svg?color=4f46e5&style=for-the-badge">
+</p>
+
 <p align="center">
   <a href="#dart-sobre">Sobre</a> &#xa0; | &#xa0;
   <a href="#rocket-tecnologias">Tecnologias</a> &#xa0; | &#xa0;
@@ -44,7 +48,8 @@ Apesar de parecer poucas funcionalidades foi trabalhado conceitos importantes do
 
 Além de concluir o desafio eu também adicionei algumas funcionalidades que eu achei que ficou legal :D como por exemplo:
 
-- Validação do dados no formulário com React Hook Forms junto com o Zod
+- Responsividade, adaptei o layout para funcionar em dispositivos móveis
+- Validação dos dados no formulário com React Hook Forms junto com o Zod
 - Utilizei a API do ViaCEP para preencher o formulário, após o usuário informar o seu CEP
 - Exibir uma mensagem (toast) quando o usuário adiciona um café ao carrinho
 - Exibir uma mensagem (toast) quando o usuário remove um café ao carrinho
