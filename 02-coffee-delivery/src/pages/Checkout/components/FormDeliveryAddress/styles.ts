@@ -9,6 +9,9 @@ export const FormDeliveryAddressContainer = styled.div`
   @media ((min-width: 321px) and (max-width: 600px)) {
     width: 100%;
   }
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    width: 100%;
+  }
 `
 
 export const FormDeliveryAddressBackground = styled.div`

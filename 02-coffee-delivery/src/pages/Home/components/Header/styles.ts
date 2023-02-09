@@ -8,14 +8,7 @@ export const HeaderContainer = styled.header`
   column-gap: 3.5rem;
   background-image: url(${headerBackground});
 
-  /* @media (max-width: 320px) {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100% !important;
-  } */
-  @media (max-width: 600px) {
+  @media (max-width: 960px) {
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -26,6 +19,19 @@ export const HeaderContainer = styled.header`
 export const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: ${(props) => props.theme['base-title']};
+    width: 36.75rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: ${(props) => props.theme['base-subtitle']};
+  }
 
   @media (max-width: 320px) {
     order: 2;
@@ -53,17 +59,9 @@ export const DescriptionContainer = styled.div`
     }
   }
 
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    color: ${(props) => props.theme['base-title']};
-    width: 36.75rem;
-    margin-bottom: 1rem;
-  }
-  p {
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: ${(props) => props.theme['base-subtitle']};
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    order: 2;
+    width: 100%;
   }
 `
 export const ItemsContainer = styled.div`
@@ -152,6 +150,11 @@ export const CoffeeCupImage = styled.img`
     order: 1;
     width: 20rem;
     align-self: center;
+    margin-bottom: 1rem;
+  }
+
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    order: 1;
     margin-bottom: 1rem;
   }
 `

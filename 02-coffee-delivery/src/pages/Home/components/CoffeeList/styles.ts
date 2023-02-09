@@ -10,16 +10,7 @@ export const CoffeeListContainer = styled.section`
     font-size: 2rem;
   }
 
-  /* @media (max-width: 320px) {
-    padding: 2rem;
-
-    h2 {
-      font-size: 1.5rem;
-    }
-
-    margin-bottom: 2rem;
-  } */
-  @media (max-width: 600px) {
+  @media (max-width: 960px) {
     padding: 2rem;
 
     h2 {
@@ -34,6 +25,10 @@ export const CoffeeCardsContainer = styled.div`
   flex-wrap: wrap;
   column-gap: 2rem;
   row-gap: 2.5rem;
+
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    column-gap: 1rem;
+  }
 `
 
 export const CoffeeCard = styled.div`
@@ -47,10 +42,6 @@ export const CoffeeCard = styled.div`
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 36px;
   padding: 1.25rem;
-
-  @media (max-width: 600px) {
-    width: 100%;
-  }
 
   img {
     width: 7.5rem;
@@ -71,6 +62,13 @@ export const CoffeeCard = styled.div`
     color: ${(props) => props.theme['base-label']};
     text-align: center;
     margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    width: calc(50% - 1rem);
   }
 `
 

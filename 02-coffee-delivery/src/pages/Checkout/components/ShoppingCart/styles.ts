@@ -11,6 +11,10 @@ export const CartContainer = styled.div`
     width: 100%;
     margin-top: 2rem;
   }
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    width: 100%;
+    margin-top: 2rem;
+  }
 `
 export const CartList = styled.div`
   padding: 2.5rem;
@@ -30,6 +34,14 @@ export const CartList = styled.div`
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     width: 100%;
+  }
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 `
 export const CartEmpty = styled.div`
@@ -61,20 +73,12 @@ export const CartItem = styled.div`
   }
 
   @media (max-width: 320px) {
-    img {
-      width: 3rem !important;
-      margin: 0 !important;
-    }
-
-    h3 {
-      font-size: 1rem;
-    }
     flex-wrap: wrap;
     align-items: flex-start;
     column-gap: 0.25rem;
     row-gap: 1rem;
-  }
-  @media ((min-width: 321px) and (max-width: 600px)) {
+    padding: 1rem 0;
+
     img {
       width: 3rem !important;
       margin: 0 !important;
@@ -83,10 +87,32 @@ export const CartItem = styled.div`
     h3 {
       font-size: 1rem;
     }
+  }
+  @media ((min-width: 321px) and (max-width: 600px)) {
     flex-wrap: wrap;
     align-items: flex-start;
     column-gap: 1rem;
     row-gap: 1rem;
+    padding: 1rem 0;
+
+    img {
+      width: 3rem !important;
+      margin: 0 !important;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+  }
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 1rem;
+    row-gap: 1rem;
+
+    img {
+      margin: 0;
+    }
   }
 `
 export const CartItemDescription = styled.div`
@@ -94,6 +120,9 @@ export const CartItemDescription = styled.div`
   width: 10.6875rem;
 
   @media (max-width: 320px) {
+    margin: 0;
+  }
+  @media ((min-width: 601px) and (max-width: 960px)) {
     margin: 0;
   }
 

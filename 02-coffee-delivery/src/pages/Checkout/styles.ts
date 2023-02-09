@@ -9,6 +9,9 @@ export const CheckoutContainer = styled.div`
   @media ((min-width: 321px) and (max-width: 600px)) {
     padding: 0 2rem;
   }
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    padding: 0 2rem;
+  }
 `
 
 export const FormContainer = styled.div`
@@ -28,6 +31,10 @@ export const FormContainer = styled.div`
       flex-direction: column;
     }
     @media ((min-width: 321px) and (max-width: 600px)) {
+      display: flex;
+      flex-direction: column;
+    }
+    @media ((min-width: 601px) and (max-width: 960px)) {
       display: flex;
       flex-direction: column;
     }

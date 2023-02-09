@@ -29,6 +29,9 @@ export const SuccessContainer = styled.div`
       margin-top: 1rem;
     }
   }
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    padding: 0 2rem;
+  }
 `
 export const OrderWrapper = styled.div`
   margin-top: 2.5rem;
@@ -63,6 +66,17 @@ export const OrderWrapper = styled.div`
       margin-top: 2rem;
     }
   }
+
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
+
+  img {
+    position: unset;
+    margin-top: 2rem;
+  }
 `
 export const OrderContainer = styled.div`
   display: flex;
@@ -92,6 +106,9 @@ export const OrderContainer = styled.div`
   }
   @media ((min-width: 321px) and (max-width: 600px)) {
     padding: 1rem;
+    width: 100%;
+  }
+  @media ((min-width: 601px) and (max-width: 960px)) {
     width: 100%;
   }
 `

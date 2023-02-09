@@ -58,6 +58,10 @@ export const Nav = styled.nav`
     }
   }
 
+  @media ((min-width: 601px) and (max-width: 960px)) {
+    padding: 2rem;
+  }
+
   div {
     display: flex;
     gap: 0.75rem;
