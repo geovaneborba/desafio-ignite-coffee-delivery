@@ -43,7 +43,7 @@ export function CoffeeList() {
 
       setProducts(
         response.map((product: Product) => {
-          return { ...product, quantity: 0 }
+          return { ...product, quantity: 1 }
         })
       )
     }
@@ -64,7 +64,7 @@ export function CoffeeList() {
   function handleDecrement(product: Product) {
     setProducts((prevProducts) =>
       prevProducts.map((prevProduct) => {
-        if (prevProduct.id === product.id && prevProduct.quantity > 0) {
+        if (prevProduct.id === product.id && prevProduct.quantity > 1) {
           return { ...prevProduct, quantity: prevProduct.quantity - 1 }
         }
         return prevProduct
