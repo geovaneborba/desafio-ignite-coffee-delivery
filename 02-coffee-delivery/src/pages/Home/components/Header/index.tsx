@@ -10,8 +10,6 @@ import {
 
 import coffeeDeliveryCupImg from '../../../../assets/coffee-delivery-cup.svg'
 
-console.log(coffeeDeliveryCupImg)
-
 export function Header() {
   return (
     <HeaderContainer>

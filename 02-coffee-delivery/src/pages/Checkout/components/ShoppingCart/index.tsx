@@ -1,6 +1,7 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { toast } from 'react-toastify'
 import { useCart } from '../../../../context/CartContext'
+import { priceFormatter } from '../../../../utils/formatter'
 import {
   CartContainer,
   CartList,
@@ -28,9 +29,23 @@ export function ShoppingCart() {
     decreaseCoffeeQuantity,
   } = useCart()
 
-  const totalItemsPrice = items.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.price * currentValue.quantity
-  }, 0)
+  const totalItemsPrice = items.reduce(
+    (accumulator, currentValue) => {
+      accumulator.totalItems += currentValue.price * currentValue.quantity
+
+      accumulator.total =
+        accumulator.totalItems > 0
+          ? accumulator.totalItems + accumulator.delivery
+          : 0
+
+      return accumulator
+    },
+    {
+      totalItems: 0,
+      total: 0,
+      delivery: 8.6,
+    }
+  )
 
   return (
     <CartContainer>
@@ -95,13 +110,7 @@ export function ShoppingCart() {
               </CartItemActions>
             </CartItemDescription>
 
-            <CartItemPrice>
-              {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              }).format(item.price)}
-            </CartItemPrice>
+            <CartItemPrice>{priceFormatter.format(item.price)}</CartItemPrice>
           </CartItem>
         ))}
       </CartList>
@@ -109,26 +118,18 @@ export function ShoppingCart() {
       <CartCheckout>
         <CartCheckoutTotalItems>
           <h3>Total de itens</h3>
-          <span>
-            {new Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(totalItemsPrice)}
-          </span>
+          <span>{priceFormatter.format(totalItemsPrice.totalItems)}</span>
         </CartCheckoutTotalItems>
         <CartCheckoutDelivery>
           <h3>Entrega</h3>
-          <span>R$ 7,50</span>
+          <span>{priceFormatter.format(totalItemsPrice.delivery)}</span>
         </CartCheckoutDelivery>
         <CartCheckoutTotal>
           <h3>Total</h3>
           <span>
             {items.length === 0
               ? 'R$ 0,00'
-              : new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(totalItemsPrice === 0 ? 0 : totalItemsPrice + 7.5)}
+              : priceFormatter.format(totalItemsPrice.total)}
           </span>
         </CartCheckoutTotal>
         {/* disabled={items.length === 0} */}
