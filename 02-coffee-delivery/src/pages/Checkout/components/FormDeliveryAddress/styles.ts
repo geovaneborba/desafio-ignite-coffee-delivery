@@ -146,6 +146,7 @@ export const FormPayment = styled.div`
     padding: 2rem 1rem;
   }
 `
+
 export const FormPaymentHeader = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -171,11 +172,15 @@ export const FormPaymentHeader = styled.div`
   }
 `
 
-interface ButtonProps {
-  selectedPaymentMethod: string
-}
+export const FormInputPaymentGroup = styled.div`
+  [type='radio']:checked + label {
+    background: ${(props) => props.theme['purple-light']};
+    border: 1px solid ${(props) => props.theme.purple};
+    color: ${(props) => props.theme['base-text']};
+  }
+`
 
-const BaseButtonPayment = styled.button<ButtonProps>`
+export const LabelPayment = styled.label`
   flex: 1;
   display: flex;
   align-items: center;
@@ -216,34 +221,6 @@ const BaseButtonPayment = styled.button<ButtonProps>`
   @media ((min-width: 321px) and (max-width: 600px)) {
     width: 100%;
   }
-`
-
-export const CreditButton = styled(BaseButtonPayment)<ButtonProps>`
-  ${(props) =>
-    props.selectedPaymentMethod === 'credit' &&
-    css`
-      background: ${(props) => props.theme['purple-light']};
-      border: 1px solid ${(props) => props.theme.purple};
-      color: ${(props) => props.theme['base-text']};
-    `}
-`
-export const DebitButton = styled(BaseButtonPayment)<ButtonProps>`
-  ${(props) =>
-    props.selectedPaymentMethod === 'debit' &&
-    css`
-      background: ${(props) => props.theme['purple-light']};
-      border: 1px solid ${(props) => props.theme.purple};
-      color: ${(props) => props.theme['base-text']};
-    `}
-`
-export const MoneyButton = styled(BaseButtonPayment)<ButtonProps>`
-  ${(props) =>
-    props.selectedPaymentMethod === 'money' &&
-    css`
-      background: ${(props) => props.theme['purple-light']};
-      border: 1px solid ${(props) => props.theme.purple};
-      color: ${(props) => props.theme['base-text']};
-    `}
 `
 
 export const FormPayments = styled.div`

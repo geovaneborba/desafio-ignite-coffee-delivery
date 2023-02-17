@@ -18,17 +18,7 @@ const checkoutSchema = z.object({
   state: z.string().min(1),
   paymentMethod: z.enum(['credit', 'debit', 'money']),
 })
-
-export interface checkoutFormData {
-  zipCode: string
-  street: string
-  streetNumber: number
-  complement?: string
-  district: string
-  city: string
-  state: string
-  paymentMethod: string
-}
+export type checkoutFormData = z.infer<typeof checkoutSchema>
 
 export function Checkout() {
   const formDeliveryAddress = useForm<checkoutFormData>({
@@ -39,6 +29,8 @@ export function Checkout() {
   const { handleSubmit } = formDeliveryAddress
 
   function checkoutFormSubmit(data: checkoutFormData) {
+    console.log(data)
+
     navigate('/success', { state: { data } })
   }
 

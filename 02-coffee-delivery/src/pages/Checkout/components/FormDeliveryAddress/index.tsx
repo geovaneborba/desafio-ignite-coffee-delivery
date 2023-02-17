@@ -2,19 +2,19 @@ import { MapPin, CurrencyDollar, CreditCard, Bank, Money } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { z } from 'zod'
-import { checkoutFormData } from '../..'
+import { checkoutFormData } from '../../index'
+
 import {
   FormDeliveryAddressContainer,
   FormHeader,
-  CreditButton,
-  DebitButton,
   FormInputContainer,
   FormInputGroup,
   FormPayment,
   FormPaymentHeader,
   FormPayments,
-  MoneyButton,
   FormDeliveryAddressBackground,
+  LabelPayment,
+  FormInputPaymentGroup,
 } from './styles'
 
 interface Address {
@@ -34,7 +34,6 @@ export function FormDeliveryAddress() {
   const [address, setAddress] = useState<Address>({} as Address)
   const [zipCode, setZipCode] = useState('')
   const [zipCodeMask, setZipCodeMask] = useState('')
-  const [selectedPaymentButton, setSelectedPaymentButton] = useState('')
 
   const { register, setValue } = useFormContext<checkoutFormData>()
 
@@ -92,13 +91,14 @@ export function FormDeliveryAddress() {
 
         <FormInputContainer>
           <input
-            value={zipCodeMask ? zipCodeMask : ''}
             {...register('zipCode')}
+            value={zipCodeMask ? zipCodeMask : ''}
             type="string"
             id="zipCode"
             placeholder="CEP"
             onChange={applyZipCodeMask}
             onBlur={validateZipCode}
+            inputMode="decimal"
           />
 
           <input
@@ -106,12 +106,14 @@ export function FormDeliveryAddress() {
             id="street"
             placeholder="Rua"
             defaultValue={address.logradouro}
+            value={address.logradouro}
             {...register('street')}
           />
           <input
             type="text"
             id="number"
             placeholder="Número"
+            inputMode="decimal"
             {...register('streetNumber', { valueAsNumber: true })}
           />
           <FormInputGroup>
@@ -120,6 +122,7 @@ export function FormDeliveryAddress() {
               id="complement"
               placeholder="Complemento"
               defaultValue={address.complemento}
+              value={address.complemento}
               {...register('complement')}
             />
             <label htmlFor="complement" title="Opcional">
@@ -131,6 +134,7 @@ export function FormDeliveryAddress() {
             id="district"
             placeholder="Bairro"
             defaultValue={address.bairro}
+            value={address.bairro}
             {...register('district')}
           />
           <input
@@ -138,6 +142,7 @@ export function FormDeliveryAddress() {
             id="city"
             placeholder="Cidade"
             defaultValue={address.localidade}
+            value={address.localidade}
             {...register('city')}
           />
           <input
@@ -145,6 +150,7 @@ export function FormDeliveryAddress() {
             id="state"
             placeholder="UF"
             defaultValue={address.uf}
+            value={address.uf}
             {...register('state')}
           />
         </FormInputContainer>
@@ -160,55 +166,49 @@ export function FormDeliveryAddress() {
             </h6>
           </div>
         </FormPaymentHeader>
+
         <FormPayments>
-          <label>
-            <CreditButton
+          <FormInputPaymentGroup>
+            <input
               {...register('paymentMethod')}
-              defaultValue="credit"
-              selectedPaymentMethod={selectedPaymentButton}
-              type="button"
-              onClick={() => {
-                setValue('paymentMethod', '')
-                setValue('paymentMethod', 'credit')
-                setSelectedPaymentButton('credit')
-              }}
-            >
+              type="radio"
+              id="credit"
+              value="credit"
+              hidden
+            />
+            <LabelPayment htmlFor="credit" data-payment-type="credit">
               <CreditCard />
-              Cartão de crédito
-            </CreditButton>
-          </label>
+              Cartão de Credito
+            </LabelPayment>
+          </FormInputPaymentGroup>
 
-          <label>
-            <DebitButton
-              defaultValue="debit"
-              selectedPaymentMethod={selectedPaymentButton}
-              type="button"
-              onClick={() => {
-                setValue('paymentMethod', '')
-                setValue('paymentMethod', 'debit')
-                setSelectedPaymentButton('debit')
-              }}
-            >
+          <FormInputPaymentGroup>
+            <input
+              {...register('paymentMethod')}
+              type="radio"
+              id="debit"
+              value="debit"
+              hidden
+            />
+            <LabelPayment htmlFor="debit" data-payment-type="debit">
               <Bank />
-              Cartão de débito
-            </DebitButton>
-          </label>
+              Cartão de Débito
+            </LabelPayment>
+          </FormInputPaymentGroup>
 
-          <label>
-            <MoneyButton
-              defaultValue="money"
-              selectedPaymentMethod={selectedPaymentButton}
-              type="button"
-              onClick={() => {
-                setValue('paymentMethod', '')
-                setValue('paymentMethod', 'money')
-                setSelectedPaymentButton('money')
-              }}
-            >
+          <FormInputPaymentGroup>
+            <input
+              {...register('paymentMethod')}
+              type="radio"
+              id="money"
+              value="money"
+              hidden
+            />
+            <LabelPayment htmlFor="money" data-payment-type="money">
               <Money />
               Dinheiro
-            </MoneyButton>
-          </label>
+            </LabelPayment>
+          </FormInputPaymentGroup>
         </FormPayments>
       </FormPayment>
     </FormDeliveryAddressContainer>
