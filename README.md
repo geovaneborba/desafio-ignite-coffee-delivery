@@ -1,9 +1,9 @@
-<img src="../assets/coffee-delivery.png" alt="Imagem do banner coffee delivery" />
+<img src="./assets/coffee-delivery.png" alt="Imagem do banner coffee delivery" />
 
 <p align="center">
-  <img alt="Repo size"  src="https://img.shields.io/github/repo-size/geovaneborba/rocketseat-ignite-desafios?color=4f46e5&style=for-the-badge">
-  <img alt="GitHub top language"  src="https://img.shields.io/github/languages/top/geovaneborba/rocketseat-ignite-desafios?color=4f46e5&style=for-the-badge"> <img alt="GitHub language count"  src="https://img.shields.io/github/languages/count/geovaneborba/rocketseat-ignite-desafios?color=4f46e5&style=for-the-badge">
-  <img alt="Licença" src="https://img.shields.io/github/license/geovaneborba/rocketseat-ignite-desafios?color=4f46e5&style=for-the-badge">
+  <img alt="Repo size"  src="https://img.shields.io/github/repo-size/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge">
+  <img alt="GitHub top language"  src="https://img.shields.io/github/languages/top/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge"> <img alt="GitHub language count"  src="https://img.shields.io/github/languages/count/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge">
+  <img alt="Licença" src="https://img.shields.io/github/license/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge">
 </p>
 
 <p align='center'>
@@ -46,7 +46,7 @@ Apesar de parecer poucas funcionalidades foi trabalhado conceitos importantes do
 
 🎯 <a href="https://efficient-sloth-d85.notion.site/Desafio-02-Coffee-Delivery-30e42a21fdb44b09a85244fc2c3dbdf9" target="_blank">Clique aqui para acessar o desafio ⬅️</a>
 
-Além de concluir o desafio eu também adicionei algumas funcionalidades que eu achei que ficou legal :D como por exemplo:
+Além de concluir o desafio eu também adicionei algumas funcionalidades que eu achei que ficou legal 😁 como por exemplo:
 
 - Responsividade, adaptei o layout para funcionar em dispositivos móveis
 - Validação dos dados no formulário com React Hook Forms junto com o Zod
@@ -85,11 +85,10 @@ Antes de começar, você precisa ter o [Git](https://git-scm.com) e o [Node](htt
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/geovaneborba/rocketseat-ignite-desafios.git
+$ git clone https://github.com/geovaneborba/coffee-delivery.git
 
-# Entre na pasta rocketseat-ignite-desafios e logo após entre na pasta
-# 02-coffee-delivery
-$ cd rocketseat-ignite-desafios/02-coffee-delivery
+# Entre na pasta coffee-delivery
+$ cd coffee-delivery
 
 # Instale as dependências
 $ npm install
