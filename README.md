@@ -1,9 +1,9 @@
 <img src="./assets/coffee-delivery.png" alt="Imagem do banner coffee delivery" />
 
 <p align="center">
-  <img alt="Repo size"  src="https://img.shields.io/github/repo-size/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge">
-  <img alt="GitHub top language"  src="https://img.shields.io/github/languages/top/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge"> <img alt="GitHub language count"  src="https://img.shields.io/github/languages/count/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge">
-  <img alt="Licença" src="https://img.shields.io/github/license/geovaneborba/coffee-delivery?color=4f46e5&style=for-the-badge">
+  <img alt="Repo size"  src="https://img.shields.io/github/repo-size/geovaneborba/ignite-coffee-delivery?color=4f46e5&style=for-the-badge">
+  <img alt="GitHub top language"  src="https://img.shields.io/github/languages/top/geovaneborba/ignite-coffee-delivery?color=4f46e5&style=for-the-badge"> <img alt="GitHub language count"  src="https://img.shields.io/github/languages/count/geovaneborba/ignite-coffee-delivery?color=4f46e5&style=for-the-badge">
+  <img alt="Licença" src="https://img.shields.io/github/license/geovaneborba/ignite-coffee-delivery?color=4f46e5&style=for-the-badge">
 </p>
 
 <p align='center'>
@@ -85,9 +85,9 @@ Antes de começar, você precisa ter o [Git](https://git-scm.com) e o [Node](htt
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/geovaneborba/coffee-delivery.git
+$ git clone https://github.com/geovaneborba/ignite-coffee-delivery.git
 
-# Entre na pasta coffee-delivery
+# Entre na pasta
 $ cd coffee-delivery
 
 # Instale as dependências
