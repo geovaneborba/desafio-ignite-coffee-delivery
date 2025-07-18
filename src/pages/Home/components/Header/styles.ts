@@ -109,7 +109,7 @@ const BaseItemIcon = styled.span`
   font-weight: 400;
 `
 
-interface ItemIconProps {
+type ItemIconProps = {
   variant?: 'cart' | 'time' | 'packing' | 'coffee'
 }
 

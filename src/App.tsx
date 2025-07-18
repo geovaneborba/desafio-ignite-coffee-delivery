@@ -5,19 +5,42 @@ import { CartProvider } from './context/CartContext'
 import { Router } from './routes/Router'
 import { GlobalStyles } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './lib/react-query'
+import { useEffect, useState } from 'react'
+import { SplashScreen } from './components/SplashScreen'
 
 function App() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <CartProvider>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
-      </CartProvider>
+  const [isLoading, setIsLoading] = useState(true)
 
-      <GlobalStyles />
-      <ToastContainer limit={5} />
-    </ThemeProvider>
+  useEffect(() => {
+    const delay = 4000 // 4 segundos de carregamento para o splash screen
+
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, delay)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={defaultTheme}>
+        <CartProvider>
+          {isLoading ? (
+            <SplashScreen />
+          ) : (
+            <BrowserRouter>
+              {' '}
+              <Router />{' '}
+            </BrowserRouter>
+          )}
+        </CartProvider>
+
+        <GlobalStyles />
+        <ToastContainer limit={5} />
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }
 

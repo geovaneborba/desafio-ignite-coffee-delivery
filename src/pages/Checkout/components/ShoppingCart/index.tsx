@@ -1,7 +1,7 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { toast } from 'react-toastify'
 import { useCart } from '../../../../context/CartContext'
-import { priceFormatter } from '../../../../utils/formatter'
+import { priceFormatterCheckout } from '../../../../utils/formatter'
 import {
   CartContainer,
   CartList,
@@ -16,78 +16,59 @@ import {
   CartConfirmationButton,
   CartEmpty,
   SelectQuantityContainer,
-  DecrementButton,
-  IncrementButton,
   CartItemPrice,
+  Button,
 } from './styles'
 
 export function ShoppingCart() {
   const {
-    items,
+    cartItems,
+    cartItemsPrice: { totalItems, delivery, total },
     removeCoffee,
-    increaseCoffeeQuantity,
-    decreaseCoffeeQuantity,
+    updateCoffeeQuantity,
   } = useCart()
-
-  const totalItemsPrice = items.reduce(
-    (accumulator, currentValue) => {
-      accumulator.totalItems += currentValue.price * currentValue.quantity
-
-      accumulator.total =
-        accumulator.totalItems > 0
-          ? accumulator.totalItems + accumulator.delivery
-          : 0
-
-      return accumulator
-    },
-    {
-      totalItems: 0,
-      total: 0,
-      delivery: 8.6,
-    }
-  )
 
   return (
     <CartContainer>
       <h3>Cafés selecionados</h3>
 
       <CartList>
-        {items.length === 0 && (
+        {cartItems.length === 0 && (
           <CartEmpty>
             <p>Ainda não há itens no seu carrinho :(</p>
           </CartEmpty>
         )}
 
-        {items.map((item) => (
+        {cartItems.map((item) => (
           <CartItem key={item.id}>
-            <img src={item.imgUrl} alt="Expresso Tradicional" />
+            <img src={item.image.url} alt={item.image.alt || item.title} />
 
             <CartItemDescription>
-              <h3>{item.name}</h3>
+              <h3>{item.title}</h3>
               <CartItemActions>
                 <SelectQuantityContainer>
-                  <DecrementButton
+                  <Button
                     type="button"
                     onClick={() => {
-                      decreaseCoffeeQuantity(item.id)
-
-                      if (item.quantity === 0) {
-                        console.log(item.quantity)
-                        removeCoffee(item.id)
+                      if (item.quantity <= 1) {
+                        return
                       }
+                      updateCoffeeQuantity(item.id, item.quantity - 1)
                     }}
                   >
                     <Minus weight="fill" />
-                  </DecrementButton>
+                  </Button>
 
-                  <span>{item.quantity ? item.quantity : 0}</span>
+                  <span>{item.quantity ?? 0}</span>
 
-                  <IncrementButton
+                  <Button
                     type="button"
-                    onClick={() => increaseCoffeeQuantity(item.id)}
+                    onClick={() => {
+                      updateCoffeeQuantity(item.id, item.quantity + 1)
+                    }}
                   >
                     <Plus weight="fill" />
-                  </IncrementButton>
+                  </Button>
                 </SelectQuantityContainer>
 
                 <CartRemoveItemButton
@@ -95,7 +76,7 @@ export function ShoppingCart() {
                   onClick={() => {
                     removeCoffee(item.id)
 
-                    toast.error(`${item.name} removido do carrinho!`, {
+                    toast.error(`${item.title} removido do carrinho!`, {
                       position: 'top-right',
                       theme: 'light',
                       draggable: true,
@@ -110,7 +91,7 @@ export function ShoppingCart() {
               </CartItemActions>
             </CartItemDescription>
 
-            <CartItemPrice>{priceFormatter.format(item.price)}</CartItemPrice>
+            <CartItemPrice>{priceFormatterCheckout(item.price)}</CartItemPrice>
           </CartItem>
         ))}
       </CartList>
@@ -118,18 +99,16 @@ export function ShoppingCart() {
       <CartCheckout>
         <CartCheckoutTotalItems>
           <h3>Total de itens</h3>
-          <span>{priceFormatter.format(totalItemsPrice.totalItems)}</span>
+          <span>{priceFormatterCheckout(totalItems)}</span>
         </CartCheckoutTotalItems>
         <CartCheckoutDelivery>
           <h3>Entrega</h3>
-          <span>{priceFormatter.format(totalItemsPrice.delivery)}</span>
+          <span>{priceFormatterCheckout(delivery)}</span>
         </CartCheckoutDelivery>
         <CartCheckoutTotal>
           <h3>Total</h3>
           <span>
-            {items.length === 0
-              ? 'R$ 0,00'
-              : priceFormatter.format(totalItemsPrice.total)}
+            {cartItems.length === 0 ? 'R$ 0,00' : priceFormatterCheckout(total)}
           </span>
         </CartCheckoutTotal>
         {/* disabled={items.length === 0} */}

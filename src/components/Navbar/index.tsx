@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
 
 export function Navbar() {
-  const { items } = useCart()
+  const {
+    cartItemsPrice: { totalItemsInCart },
+  } = useCart()
+
   return (
     <Nav>
       <Link to="/" title="Coffee Delivery">
@@ -23,7 +26,7 @@ export function Navbar() {
 
         <Link to="/checkout">
           <button type="button" title="Carrinho de compras">
-            {items.length !== 0 && <span>{items.length}</span>}
+            {totalItemsInCart !== 0 && <span>{totalItemsInCart}</span>}
             <ShoppingCart weight="fill" />
           </button>
         </Link>

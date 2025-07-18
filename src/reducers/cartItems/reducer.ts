@@ -1,98 +1,93 @@
-import { ActionTypes } from './actions'
+import { toast } from 'react-toastify'
+import { CartAction } from './actions'
 
-export interface Product {
+export type Product = {
   id: string
-  name: string
+  title: string
   description: string
+  image: {
+    url: string
+    alt: string | null
+  }
   price: number
   stock: number
-  imgUrl: string
-  type: []
+  tags: string[]
+}
+
+type CartItems = Product & {
   quantity: number
 }
 
-interface CartState {
-  items: Product[]
+type CartState = {
+  cartItems: CartItems[]
 }
 
-interface Action {
-  type: string
-  payload?: any
-}
-
-export function cartReducer(state: CartState, action: Action) {
-  function addItem() {
-    let itemExists = false
-
-    const updatedItems = state.items.map((item) => {
-      if (item.id === action.payload.newCoffeeItem.id) {
-        itemExists = true
-        return {
-          ...item,
-          quantity: item.quantity + action.payload.newCoffeeItem.quantity,
-        }
-      } else {
-        return item
-      }
-    })
-
-    if (itemExists) {
-      return updatedItems
-    } else {
-      return [...state.items, { ...action.payload.newCoffeeItem }]
-    }
-  }
-
-  function increaseCoffeeQuantity() {
-    const updatedItems = state.items.map((item) => {
-      if (item.id === action.payload.coffeeId) {
-        return { ...item, quantity: item.quantity + 1 }
-      } else {
-        return item
-      }
-    })
-
-    return updatedItems
-  }
-
-  function decreaseCoffeeQuantity() {
-    const updatedItems = state.items.map((item) => {
-      if (item.id === action.payload.coffeeId) {
-        return {
-          ...item,
-          quantity: item.quantity > 0 && item.quantity - 1,
-        }
-      } else {
-        return item
-      }
-    })
-
-    return updatedItems
-  }
-
+export function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
-    case ActionTypes.ADD_ITEM:
+    case 'ADD_ITEM': {
+      const newCoffee = {
+        ...action.payload.product,
+      }
+
+      const itemInCart = state.cartItems.find(
+        (item) => item.id === newCoffee.id
+      )
+
+      if (itemInCart) {
+        if (itemInCart.quantity >= itemInCart.stock) {
+          toast.error('Quantidade indisponível no estoque!')
+          return state
+        }
+
+        const updatedCart = state.cartItems.map((item) =>
+          item.id === newCoffee.id
+            ? {
+                ...item,
+                quantity: item.quantity + newCoffee.quantity,
+                stock: item.stock - newCoffee.quantity,
+              }
+            : item
+        )
+
+        return { ...state, cartItems: updatedCart }
+      }
+
       return {
         ...state,
-        items: addItem(),
+        cartItems: [...state.cartItems, { ...newCoffee }],
       }
-    case ActionTypes.REMOVE_ITEM:
+    }
+
+    case 'REMOVE_ITEM': {
       return {
         ...state,
-        items: [
-          ...state.items.filter((item) => item.id !== action.payload.coffeeId),
-        ],
+        cartItems: state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        ),
       }
-    case ActionTypes.INCREASE_COFFEE_QUANTITY:
+    }
+
+    case 'UPDATE_QUANTITY': {
+      const itemInCart = state.cartItems.find(
+        (item) => item.id === action.payload.id
+      )
+
+      if (!itemInCart) {
+        return state
+      }
+
+      const updatedCart = state.cartItems.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, quantity: action.payload.quantity }
+          : item
+      )
+
       return {
         ...state,
-        items: increaseCoffeeQuantity(),
+        cartItems: updatedCart,
       }
-    case ActionTypes.DECREASE_COFFEE_QUANTITY:
-      return {
-        ...state,
-        items: decreaseCoffeeQuantity(),
-      }
+    }
+
     default:
       return state
   }

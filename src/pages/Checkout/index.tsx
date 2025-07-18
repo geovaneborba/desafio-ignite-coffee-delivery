@@ -29,8 +29,6 @@ export function Checkout() {
   const { handleSubmit } = formDeliveryAddress
 
   function checkoutFormSubmit(data: checkoutFormData) {
-    console.log(data)
-
     navigate('/success', { state: { data } })
   }
 

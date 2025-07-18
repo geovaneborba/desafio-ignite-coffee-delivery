@@ -17,7 +17,7 @@ import {
   FormInputPaymentGroup,
 } from './styles'
 
-interface Address {
+type Address = {
   bairro: string
   cep: string
   complemento?: string

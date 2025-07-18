@@ -157,7 +157,7 @@ export const SelectQuantityContainer = styled.div`
   }
 `
 
-const BaseIncrementButton = styled.button`
+export const Button = styled.button`
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -181,8 +181,6 @@ const BaseIncrementButton = styled.button`
     }
   }
 `
-export const DecrementButton = styled(BaseIncrementButton)``
-export const IncrementButton = styled(BaseIncrementButton)``
 
 export const CartItemActions = styled.div`
   display: flex;

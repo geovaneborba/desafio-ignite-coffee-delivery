@@ -2,80 +2,131 @@ import {
   createContext,
   ReactNode,
   useContext,
-  useEffect,
+  useMemo,
   useReducer,
 } from 'react'
-import {
-  addNewCoffeeItemAction,
-  decreaseCoffeeQuantityAction,
-  increaseCoffeeQuantityAction,
-  removeCoffeeAction,
-} from '../reducers/cartItems/actions'
+
 import { cartReducer, Product } from '../reducers/cartItems/reducer'
 
-interface CartContextData {
-  items: Product[]
-  addItem: (data: Product) => void
+export type CartItem = Product & {
+  quantity: number
+}
+
+type CartContextData = {
+  cartItems: CartItem[]
+  cartItemsPrice: {
+    totalItems: number
+    total: number
+    delivery: number
+    totalItemsInCart: number
+  }
+  addItemInCart: (data: CartItem) => void
   removeCoffee: (coffeeId: string) => void
-  increaseCoffeeQuantity: (coffeeId: string) => void
-  decreaseCoffeeQuantity: (coffeeId: string) => void
+  updateCoffeeQuantity: (coffeeId: string, quantity: number) => void
+  getQuantityOfCoffeeInCart: (coffeeId: string) => number
 }
 
 const CartContext = createContext({} as CartContextData)
 
-interface CartContextProps {
+type CartContextProps = {
   children: ReactNode
 }
 
-const inicialValues = {
-  items: [],
+const initialValues = {
+  cartItems: [] as CartItem[],
 }
 
+// function loadCartStateFromLocalStorage() {
+//   const storedState = localStorage.getItem('@coffee-delivery:cart-state-1.0.0')
+
+//   if (storedState) {
+//     return JSON.parse(storedState)
+//   }
+
+//   return initialValues
+// }
+
 export function CartProvider({ children }: CartContextProps) {
-  const [cartState, dispatch] = useReducer(cartReducer, inicialValues, () => {
-    const storedState = localStorage.getItem(
-      '@coffee-delivery:cart-state-1.0.0'
-    )
+  const [cartState, dispatch] = useReducer(
+    cartReducer,
+    initialValues
+    // loadCartStateFromLocalStorage
+  )
+  const { cartItems } = cartState
 
-    if (storedState) {
-      return JSON.parse(storedState)
-    }
-
-    return {
-      items: [],
-    }
-  })
-  const { items } = cartState
-
-  function addItem(data: Product) {
+  function addItemInCart(data: CartItem) {
     const newCoffeeItem = data
 
-    dispatch(addNewCoffeeItemAction(newCoffeeItem))
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: {
+        product: newCoffeeItem,
+      },
+    })
   }
-  function increaseCoffeeQuantity(coffeeId: string) {
-    dispatch(increaseCoffeeQuantityAction(coffeeId))
-  }
-  function decreaseCoffeeQuantity(coffeeId: string) {
-    dispatch(decreaseCoffeeQuantityAction(coffeeId))
-  }
+
   function removeCoffee(coffeeId: string) {
-    dispatch(removeCoffeeAction(coffeeId))
+    dispatch({
+      type: 'REMOVE_ITEM',
+      payload: {
+        id: coffeeId,
+      },
+    })
   }
 
-  useEffect(() => {
-    const stateToJSON = JSON.stringify(cartState)
+  function updateCoffeeQuantity(coffeeId: string, quantity: number) {
+    dispatch({
+      type: 'UPDATE_QUANTITY',
+      payload: {
+        id: coffeeId,
+        quantity,
+      },
+    })
+  }
 
-    localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateToJSON)
-  }, [cartState])
+  function getQuantityOfCoffeeInCart(coffeeId: string) {
+    const quantity = useMemo(() => {
+      return cartItems.find((item) => item.id === coffeeId)?.quantity || 0
+    }, [cartItems, coffeeId])
+
+    return quantity
+  }
+
+  const cartItemsPrice = cartItems.reduce(
+    (accumulator, currentValue) => {
+      accumulator.totalItems += currentValue.price * currentValue.quantity
+      accumulator.totalItemsInCart += currentValue.quantity
+
+      accumulator.total =
+        accumulator.totalItems > 0
+          ? accumulator.totalItems + accumulator.delivery
+          : 0
+
+      return accumulator
+    },
+    {
+      totalItems: 0,
+      total: 0,
+      delivery: 8.6,
+      totalItemsInCart: 0,
+    }
+  )
+
+  // useEffect(() => {
+  //   const stateToJSON = JSON.stringify(cartState)
+
+  //   localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateToJSON)
+  // }, [cartState])
 
   return (
     <CartContext.Provider
       value={{
-        addItem,
+        cartItems,
+        cartItemsPrice,
+        addItemInCart,
         removeCoffee,
-        increaseCoffeeQuantity,
-        decreaseCoffeeQuantity,
-        items,
+        updateCoffeeQuantity,
+        getQuantityOfCoffeeInCart,
       }}
     >
       {children}
@@ -84,5 +135,11 @@ export function CartProvider({ children }: CartContextProps) {
 }
 
 export function useCart() {
-  return useContext(CartContext)
+  const context = useContext(CartContext)
+
+  if (!context) {
+    throw new Error('useCart must be used within a CartContextProvider')
+  }
+
+  return context
 }

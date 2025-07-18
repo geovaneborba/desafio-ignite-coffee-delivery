@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const SuccessContainer = styled.div`
   padding: 0 10rem;
+  height: 90vh;
 
   h2 {
     margin-top: 3.75rem;
@@ -139,7 +140,7 @@ const BaseItemIcon = styled.span`
     font-size: 1rem;
   }
 `
-interface ItemIconProps {
+type ItemIconProps = {
   variant?: 'local' | 'time' | 'payment'
 }
 export const ItemIcon = styled(BaseItemIcon)<ItemIconProps>`

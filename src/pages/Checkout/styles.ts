@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const CheckoutContainer = styled.div`
   padding: 0 10rem;
+  height: 90vh;
 
   @media (max-width: 320px) {
     padding: 0 2rem;
