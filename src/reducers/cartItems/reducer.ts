@@ -18,7 +18,7 @@ type CartItems = Product & {
   quantity: number
 }
 
-type CartState = {
+export type CartState = {
   cartItems: CartItems[]
 }
 
@@ -85,6 +85,13 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         cartItems: updatedCart,
+      }
+    }
+
+    case 'CLEAR_CART': {
+      return {
+        ...state,
+        cartItems: [],
       }
     }
 

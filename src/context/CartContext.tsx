@@ -2,11 +2,16 @@ import {
   createContext,
   ReactNode,
   useContext,
+  useEffect,
   useMemo,
   useReducer,
 } from 'react'
 
 import { cartReducer, Product } from '../reducers/cartItems/reducer'
+import {
+  saveCartToLocalStorage,
+  loadCartFromLocalStorage,
+} from '../storage/cart'
 
 export type CartItem = Product & {
   quantity: number
@@ -23,6 +28,7 @@ type CartContextData = {
   addItemInCart: (data: CartItem) => void
   removeCoffee: (coffeeId: string) => void
   updateCoffeeQuantity: (coffeeId: string, quantity: number) => void
+  clearCart: () => void
   getQuantityOfCoffeeInCart: (coffeeId: string) => number
 }
 
@@ -36,22 +42,12 @@ const initialValues = {
   cartItems: [] as CartItem[],
 }
 
-// function loadCartStateFromLocalStorage() {
-//   const storedState = localStorage.getItem('@coffee-delivery:cart-state-1.0.0')
-
-//   if (storedState) {
-//     return JSON.parse(storedState)
-//   }
-
-//   return initialValues
-// }
-
 export function CartProvider({ children }: CartContextProps) {
-  const [cartState, dispatch] = useReducer(
-    cartReducer,
-    initialValues
-    // loadCartStateFromLocalStorage
-  )
+  const [cartState, dispatch] = useReducer(cartReducer, initialValues, () => {
+    const storedState = loadCartFromLocalStorage()
+    return storedState || initialValues
+  })
+
   const { cartItems } = cartState
 
   function addItemInCart(data: CartItem) {
@@ -92,6 +88,12 @@ export function CartProvider({ children }: CartContextProps) {
     return quantity
   }
 
+  function clearCart() {
+    dispatch({
+      type: 'CLEAR_CART',
+    })
+  }
+
   const cartItemsPrice = cartItems.reduce(
     (accumulator, currentValue) => {
       accumulator.totalItems += currentValue.price * currentValue.quantity
@@ -112,11 +114,9 @@ export function CartProvider({ children }: CartContextProps) {
     }
   )
 
-  // useEffect(() => {
-  //   const stateToJSON = JSON.stringify(cartState)
-
-  //   localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateToJSON)
-  // }, [cartState])
+  useEffect(() => {
+    saveCartToLocalStorage(cartState)
+  }, [cartState])
 
   return (
     <CartContext.Provider
@@ -127,6 +127,7 @@ export function CartProvider({ children }: CartContextProps) {
         removeCoffee,
         updateCoffeeQuantity,
         getQuantityOfCoffeeInCart,
+        clearCart,
       }}
     >
       {children}

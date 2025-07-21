@@ -7,6 +7,8 @@ import { FormDeliveryAddress } from './components/FormDeliveryAddress'
 import { ShoppingCart } from './components/ShoppingCart'
 
 import { CheckoutContainer, FormContainer } from './styles'
+import { useCart } from '../../context/CartContext'
+import { toast } from 'react-toastify'
 
 const checkoutSchema = z.object({
   zipCode: z.string().min(8).max(8),
@@ -18,30 +20,43 @@ const checkoutSchema = z.object({
   state: z.string().min(1),
   paymentMethod: z.enum(['credit', 'debit', 'money']),
 })
-export type checkoutFormData = z.infer<typeof checkoutSchema>
+export type CheckoutFormData = z.infer<typeof checkoutSchema>
 
 export function Checkout() {
-  const formDeliveryAddress = useForm<checkoutFormData>({
+  const { cartItems, cartItemsPrice } = useCart()
+  const formDeliveryAddress = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
   })
   const navigate = useNavigate()
 
   const { handleSubmit } = formDeliveryAddress
 
-  function checkoutFormSubmit(data: checkoutFormData) {
-    navigate('/success', { state: { data } })
+  function checkoutFormSubmit(data: CheckoutFormData) {
+    if (cartItems.length === 0) {
+      toast.error('Seu carrinho está vazio!')
+
+      return
+    }
+
+    const order = {
+      ...data,
+      cartItems,
+      cartItemsPrice,
+    }
+
+    navigate('/success', { state: { params: order } })
   }
 
   return (
     <CheckoutContainer>
       <FormContainer>
-        <form action="/success" onSubmit={handleSubmit(checkoutFormSubmit)}>
-          <FormProvider {...formDeliveryAddress}>
+        <FormProvider {...formDeliveryAddress}>
+          <form onSubmit={handleSubmit(checkoutFormSubmit)}>
             <FormDeliveryAddress />
-          </FormProvider>
 
-          <ShoppingCart />
-        </form>
+            <ShoppingCart />
+          </form>
+        </FormProvider>
       </FormContainer>
     </CheckoutContainer>
   )

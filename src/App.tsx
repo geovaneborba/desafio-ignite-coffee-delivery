@@ -14,7 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const delay = 4000 // 4 segundos de carregamento para o splash screen
+    const delay = 3500 // 4 segundos de carregamento para o splash screen
 
     const timer = setTimeout(() => {
       setIsLoading(false)
